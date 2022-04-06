@@ -34,7 +34,7 @@ class Prefix():
     # c5: Should not contain special characters such as “!”, “$”, etc.
     def containsSpecialChar(self):
         flag = False
-        special_char = re.compile('[@ _ ! # $ % & * ( ) < > ? / \ | { } ~ :]')
+        special_char = re.compile('[!@_#$%&)(><?\|}{~:]')
 
         if(special_char.search(self.prefix) != None):
             flag = True
