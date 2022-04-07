@@ -1,11 +1,13 @@
+from asyncio.windows_events import NULL
 import re
 
 # this class is used to check the prefix expression before converting it to infix
 
 
 class Prefix():
+    prefix: str = NULL
 
-    def __init__(self, prefix) -> None:
+    def __init__(self, prefix: str) -> None:
         self.prefix = prefix
 
     # c1: Should contain both operator(s) AND at least 2 operands
@@ -32,12 +34,12 @@ class Prefix():
         return self.countOperators() < self.countOperands()
 
     # c5: Should not contain special characters such as “!”, “$”, etc.
-    def containsSpecialChar(self):
-        flag = False
+    def noSpecialChar(self):
+        flag = True
         special_char = re.compile('[!@_#$%&)(><?\|}{~:]')
 
         if(special_char.search(self.prefix) != None):
-            flag = True
+            flag = False
 
         return flag
 

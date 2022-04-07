@@ -28,12 +28,12 @@ from prefix_to_infix import PrefixToInfix as pi
 # pi.convertPrefixToInfix()
 
 # okay ra
-# prefix = Prefix("+ + a/ b 7 * d e / f 9")
-# pi = pi(prefix)
-# pi.convertPrefixToInfix()
+prefix = Prefix("+ + a / * b c d 123”")
+pi = pi(prefix)
+pi.convertPrefixToInfix()
 
 # DI INSAKTO ANG OUTPUT HAHAAH
 # HELP UNSAON NI
-prefix = Prefix("+ One Two")
-pi = pi(prefix)
-pi.convertPrefixToInfix()
+# prefix = Prefix("+ One Two")
+# pi = pi(prefix)
+# pi.convertPrefixToInfix()
