@@ -2,9 +2,9 @@ import unittest
 from prefix_to_infix import PrefixToInfix
 
 
-class TestScenario1(unittest.TestCase):
+class TestScenario4(unittest.TestCase):
     def setUp(self) -> None:
-        self.pi = PrefixToInfix("+ 3 5")
+        self.pi = PrefixToInfix("+ 4 6 7 ^")
         return super().setUp()
 
     def tearDown(self) -> None:

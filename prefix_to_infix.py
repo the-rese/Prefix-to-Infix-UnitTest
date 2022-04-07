@@ -10,20 +10,12 @@ class PrefixToInfix():
 
     # c1: Should contain both operator(s) AND at least 2 operands
     def completePrefix(self):
-        flag = True
-        if (self.countOperators() < 1) or (self.countOperands() < 2):
-            flag = False
-
-        return flag
+        return (self.countOperators() >= 1) and (self.countOperands() >= 2)
 
     # c3: After the last operand, an operator must not be found
     def isPrefix(self):
-        flag = True
         lastChar = self.prefix[len(self.prefix)-1]
-        if self.isOperator(lastChar):
-            flag = False
-
-        return flag
+        return not self.isOperator(lastChar)
 
     # c4: Number of operator(s) must not exceed or equal to the number of operands
     def operatorLessThanOperand(self):
