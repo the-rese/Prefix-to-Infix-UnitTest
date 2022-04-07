@@ -1,5 +1,3 @@
-from sys import prefix
-from prefix import Prefix
 from prefix_to_infix import PrefixToInfix as pi
 
 # okay ra
@@ -28,8 +26,7 @@ from prefix_to_infix import PrefixToInfix as pi
 # pi.convertPrefixToInfix()
 
 # okay ra
-prefix = Prefix("+ + a / * b c d 123”")
-pi = pi(prefix)
+pi = pi(prefix="+ + a / * b c d 123")
 pi.convertPrefixToInfix()
 
 # DI INSAKTO ANG OUTPUT HAHAAH

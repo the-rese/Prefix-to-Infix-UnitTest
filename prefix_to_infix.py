@@ -1,20 +1,89 @@
-from sys import prefix
-from prefix import Prefix
-
+import re
 # calls the methods inside the prefix class to check if it can be converted or not
 
 
 class PrefixToInfix():
-    prefix: Prefix
+    prefix: str = None
 
-    def __init__(self, prefix: Prefix) -> None:
+    def __init__(self, prefix: str) -> None:
         self.prefix = prefix
 
-    def convertPrefixToInfix(self):
-        if (not self.prefix.completePrefix()) or (not self.prefix.isPrefix()) or (not self.prefix.operatorLessThanOperand()) or (self.prefix.containsSpecialChar()):
-            print("Invalid prefix expression.")
+    # c1: Should contain both operator(s) AND at least 2 operands
+    def completePrefix(self):
+        flag = True
+        if (self.countOperators() < 1) or (self.countOperands() < 2):
+            flag = False
+
+        return flag
+
+    # c3: After the last operand, an operator must not be found
+    def isPrefix(self):
+        flag = True
+        lastChar = self.prefix[len(self.prefix)-1]
+        if self.isOperator(lastChar):
+            flag = False
+
+        return flag
+
+    # c4: Number of operator(s) must not exceed or equal to the number of operands
+    def operatorLessThanOperand(self):
+        return self.countOperators() < self.countOperands()
+
+    # c5: Should not contain special characters such as “!”, “$”, etc.
+    def noSpecialChar(self):
+        flag = True
+        special_char = re.compile('[!@_#$%&)(><?\|}{~:]')
+
+        if(special_char.search(self.prefix) != None):
+            flag = False
+
+        return flag
+
+    def isValidExpression(self):
+        if self.meetRequirements():
+            return True
         else:
-            print(self.prefixtoinfix(self.prefix.getPrefix()))
+            print("Invalid prefix expression")
+            return False
+
+    def convertPrefixToInfix(self):
+        if not self.meetRequirements():
+            return False
+        else:
+            print(self.prefixtoinfix(self.prefix))
+            return True
+
+    #
+    #
+    #
+    # helper functions
+    def countOperators(self):
+        counter = 0
+        for char in self.prefix:
+            if (char == '+') or (char == '-') or (char == '*') or (char == '/') or (char == '^'):
+                counter = counter + 1
+
+        return counter
+
+    def countOperands(self):
+        counter = 0
+        for char in self.prefix:
+            if char.isdigit():
+                counter = counter + 1
+            elif char.isalpha():
+                counter = counter + 1
+
+        return counter
+
+    def meetRequirements(self):
+        flag = False
+        if (self.completePrefix()) and (self.isPrefix()) and (self.operatorLessThanOperand()) and (self.noSpecialChar()):
+            flag = True
+
+        return flag
+
+    def isOperator(self, symbol):
+        return symbol == '+' or symbol == '-' or symbol == '*' or symbol == '/' or symbol == '^'
 
     def prefixtoinfix(self, prefix):
         stack = []
@@ -33,6 +102,3 @@ class PrefixToInfix():
             i -= 1
 
         return stack.pop()
-
-    def isOperator(self, symbol):
-        return symbol == '+' or symbol == '-' or symbol == '*' or symbol == '/' or symbol == '^'
